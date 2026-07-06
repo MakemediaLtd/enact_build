@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>ENACT</title>
+  <link rel="stylesheet" href="TemplateData/css/style.css?v=0.94">
+</head>
+<body>
+
+  <!-- Mobile incompatibility message -->
+  <div id="mobileMessage">
+    <p>Your device is not supported. Please access this experience on a desktop computer.</p>
+  </div>
+
+  <!-- Custom loading screen -->
+  <div id="loadingScreen">
+    <div id="contentWrapper">
+	<img id="cornerLogo" src="TemplateData/img/Logo_ENACT.png" alt="ENACT logo">
+    <h1 id="title">Welcome to the ENACT project’s virtual model of Florence Park!</h1>
+
+      <div id="mapContainer">
+        <img id="mapImage" src="TemplateData/img/map_background.png" alt="Map Background">
+        <div id="progressContainer">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+     
+    </div>
+	<div id="versionNumber">V0.94</div>
+  </div>
+
+  <!-- Unity game area -->
+  <div id="gameContainer" class="unity-desktop webgl-content">
+    <canvas id="gameCanvas"></canvas>
+  </div>
+
+  <script>
+    // --- Detect mobile devices ---
+    function isMobileDevice() {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    const mobileMessage = document.getElementById("mobileMessage");
+    const loadingScreen = document.getElementById("loadingScreen");
+    const gameContainer = document.getElementById("gameContainer");
+
+    if (isMobileDevice()) {
+      // Show message, hide everything else
+      mobileMessage.style.display = "flex";
+      loadingScreen.style.display = "none";
+      gameContainer.style.display = "none";
+    } else {
+      // --- Desktop flow (Unity loader) ---
+		var buildUrl = "Build";
+		var loaderUrl = buildUrl + "/18-03-26-ENACT.loader.js";
+		var config = {
+		  dataUrl: buildUrl + "/18-03-26-ENACT.data.unityweb",
+		  frameworkUrl: buildUrl + "/18-03-26-ENACT.framework.js.unityweb",
+		  codeUrl: buildUrl + "/18-03-26-ENACT.wasm.unityweb",
+		  streamingAssetsUrl: "StreamingAssets",
+		  companyName: "Make Real",
+		  productName: "ENACT",
+		  productVersion: "0.94",
+		};
+
+      const canvas = document.querySelector("#gameCanvas");
+      const progressBar = document.getElementById("progressBar");
+
+      const script = document.createElement("script");
+      script.src = loaderUrl;
+      script.onload = () => {
+        createUnityInstance(canvas, config, (progress) => {
+          progressBar.style.width = (progress * 100) + "%";
+        }).then((unityInstance) => {
+          loadingScreen.style.display = "none";
+          gameContainer.style.display = "block";
+        }).catch((message) => {
+          alert(message);
+        });
+      };
+      document.body.appendChild(script);
+    }
+  </script>
+
+</body>
+</html>

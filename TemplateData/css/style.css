@@ -1,0 +1,137 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #3d4759;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  color: white;
+}
+
+/* ---- Mobile message ---- */
+#mobileMessage {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #3d4759;
+  height: 100%;
+  width: 100%;
+  font-size: 1.8rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* ---- Loading Screen ---- */
+#loadingScreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: #3d4759;
+}
+
+#contentWrapper {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 90vw;
+  max-height: 90vh;
+  max-width: 1600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#title {
+  margin-top: 10vw;
+  width: 70%;
+  font-size: 2.2vw;
+  font-weight: 200;
+  margin-bottom: 1vw;
+}
+
+#contentWrapper p {
+  width: 70%;
+  font-size: 1.1vw;
+  line-height: 1.5em;
+  margin: 0.5vw 0;
+}
+
+#mapContainer {
+  position: relative;
+  width: 80%;
+  margin-top: 4vw;
+}
+
+#mapImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+#progressContainer {
+  position: absolute;
+  bottom: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 30px;
+  border: 2px solid white;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+#progressBar {
+  width: 0%;
+  height: 100%;
+  background-color: #f9d71c; /* Yellow bar */
+  transition: width 0.25s ease;
+}
+
+#logoBar {
+  width: 100%;
+  margin-top: auto; /* keeps it at bottom */
+  display: block;
+  background-color: #3d4759;
+  padding-top: 40px; /* ensures at least 40px gap above logo */
+  box-sizing: border-box;
+}
+
+/* ---- Unity Canvas ---- */
+#gameContainer,
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+#gameContainer {
+  display: none;
+}
+
+#versionNumber {
+  position: fixed;       /* stays in the viewport */
+  bottom: 10px;          /* small offset from bottom */
+  left: 10px;            /* small offset from left */
+  color: white;          /* matches body text */
+  font-size: 1.0vw;      /* same size as body text, you can adjust */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  z-index: 1000;         /* stays above other elements */
+  pointer-events: none;  /* doesn’t interfere with clicks */
+}
+
+#cornerLogo {
+  position: absolute;
+  top: 20px;
+  right: 0px;
+  width: 10%;
+}
